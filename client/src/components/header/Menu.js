@@ -10,6 +10,7 @@ const Menu = () => {
   const navLinks = [
     { label: "Home", icon: "home", path: "/" },
     // { label: 'Message', icon: 'near_me', path: '/message'},
+    { label: "Article", icon: "volunteer_activism", path: "/article" },
     { label: "Discover", icon: "explore", path: "/discover" },
   ];
 
@@ -77,7 +78,7 @@ const Menu = () => {
               Profile
             </Link>
 
-            <label
+            {/* <label
               htmlFor="theme"
               className="dropdown-item"
               onClick={() =>
@@ -88,7 +89,7 @@ const Menu = () => {
               }
             >
               {theme ? "Light mode" : "Dark mode"}
-            </label>
+            </label> */}
 
             <div className="dropdown-divider"></div>
             <Link
