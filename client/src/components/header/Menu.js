@@ -10,8 +10,8 @@ const Menu = () => {
   const navLinks = [
     { label: "Home", icon: "home", path: "/" },
     // { label: 'Message', icon: 'near_me', path: '/message'},
-    { label: "Article", icon: "volunteer_activism", path: "/article" },
-    { label: "Discover", icon: "explore", path: "/discover" },
+    { label: "Discover", icon: "volunteer_activism", path: "/discover" },
+    { label: "Article", icon: "article", path: "/article" },
   ];
 
   const { auth, theme, notify } = useSelector((state) => state);
@@ -33,7 +33,7 @@ const Menu = () => {
           </li>
         ))}
 
-        <li className="nav-item dropdown" style={{ opacity: 1 }}>
+        {/* <li className="nav-item dropdown" style={{ opacity: 1 }}>
           <span
             className="nav-link position-relative"
             id="navbarDropdown"
@@ -59,7 +59,7 @@ const Menu = () => {
           >
             <NotifyModal />
           </div>
-        </li>
+        </li> */}
 
         <li className="nav-item dropdown" style={{ opacity: 1 }}>
           <span
