@@ -18,6 +18,13 @@ const CardBody = ({post, theme}) => {
                         ? post.content 
                         : readMore ? post.content + ' ' : post.content.slice(0, 60) + '.....'
                     }
+                </span><br/>
+                <h5>Motive bhai: </h5>
+                <span>
+                    {
+                      post.motive
+                        
+                    }
                 </span>
                 {
                     post.content.length > 60 &&

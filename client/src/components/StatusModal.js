@@ -10,6 +10,7 @@ const StatusModal = () => {
   const dispatch = useDispatch();
 
   const [content, setContent] = useState("");
+  const [motive, setMotive] = useState("");
   const [images, setImages] = useState([]);
 
   const [stream, setStream] = useState(false);
@@ -85,12 +86,15 @@ const StatusModal = () => {
       });
 
     if (status.onEdit) {
-      dispatch(updatePost({ content, images, auth, status }));
+      console.log(content,motive, images, auth, status )
+      dispatch(updatePost({ content,motive, images, auth, status }));
     } else {
-      dispatch(createPost({ content, images, auth, socket }));
+      console.log(content,motive, images, auth, status )
+      dispatch(createPost({ content,motive, images, auth, socket }));
     }
 
     setContent("");
+    setMotive("");
     setImages([]);
     if (tracks) tracks.stop();
     dispatch({ type: GLOBALTYPES.STATUS, payload: false });
@@ -99,6 +103,7 @@ const StatusModal = () => {
   useEffect(() => {
     if (status.onEdit) {
       setContent(status.content);
+      setMotive(status.motive);
       setImages(status.images);
     }
   }, [status]);
@@ -126,6 +131,18 @@ const StatusModal = () => {
             value={content}
             placeholder={`${auth.user.username}, feeling motivated? 💫`}
             onChange={(e) => setContent(e.target.value)}
+            style={{
+              filter: theme ? "invert(1)" : "invert(0)",
+              color: theme ? "white" : "#111",
+              background: theme ? "rgba(0,0,0,.03)" : "",
+            }}
+          />
+          <input 
+            type={"text"}
+            name="motive"
+            value={motive}
+            placeholder={`${auth.user.username}, motive? 💫`}
+            onChange={(e) => setMotive(e.target.value)}
             style={{
               filter: theme ? "invert(1)" : "invert(0)",
               color: theme ? "white" : "#111",
