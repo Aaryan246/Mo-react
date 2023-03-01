@@ -33,7 +33,7 @@ const Menu = () => {
           </li>
         ))}
 
-        {/* <li className="nav-item dropdown" style={{ opacity: 1 }}>
+        <li className="nav-item dropdown" style={{ opacity: 1 }}>
           <span
             className="nav-link position-relative"
             id="navbarDropdown"
@@ -59,7 +59,7 @@ const Menu = () => {
           >
             <NotifyModal />
           </div>
-        </li> */}
+        </li>
 
         <li className="nav-item dropdown" style={{ opacity: 1 }}>
           <span
@@ -78,7 +78,7 @@ const Menu = () => {
               Profile
             </Link>
 
-            {/* <label
+            <label
               htmlFor="theme"
               className="dropdown-item"
               onClick={() =>
@@ -89,7 +89,7 @@ const Menu = () => {
               }
             >
               {theme ? "Light mode" : "Dark mode"}
-            </label> */}
+            </label>
 
             <div className="dropdown-divider"></div>
             <Link
