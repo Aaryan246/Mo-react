@@ -15,6 +15,7 @@ const PostCard = ({post, theme}) => {
 
             <Comments post={post} />
             <InputComment post={post} />
+            
         </div>
     )
 }

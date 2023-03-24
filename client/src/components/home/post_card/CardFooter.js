@@ -106,6 +106,20 @@ const CardFooter = ({ post }) => {
         <h6 style={{ padding: "0 25px", cursor: "pointer" }}>
           {post.comments.length} comments
         </h6>
+        <a
+          href="https://pages.razorpay.com/pl_LVIwvUVKuX7QL7/view"
+          target={"_blank"}
+        >
+          <button
+            style={{
+              background_color: "blue",
+              border: "0px",
+              padding: "0 25px",
+            }}
+          >
+            Donate
+          </button>
+        </a>
       </div>
 
       {/* {isShare && (
