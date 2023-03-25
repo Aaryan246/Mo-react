@@ -13,31 +13,11 @@ export const POST_TYPES = {
 }
 
 
-export const createArticle = ({content, motive,images, auth, socket}) => async (dispatch) => {
-    let media = []
+export const createArticle = ({content, motive, auth, socket}) => async (dispatch) => {
     try {
         dispatch({ type: GLOBALTYPES.ALERT, payload: {loading: true} })
-        // if(images.length > 0) media = await imageUpload(images)
-
-        const res = await postDataAPI('article', { content,motive}, auth.token)
-
-        dispatch({ 
-            type: POST_TYPES.CREATE_POST, 
-            payload: {...res.data.newPost, user: auth.user} 
-        })
-
+        const res = await postDataAPI('articles', { content,motive}, auth.token)
         dispatch({ type: GLOBALTYPES.ALERT, payload: {loading: false} })
-
-        // Notify
-        const msg = {
-            id: res.data.newPost._id,
-            text: 'added a new article.',
-            recipients: res.data.newPost.user.followers,
-            url: `/article/${res.data.newPost._id}`,
-            content
-        }
-
-        dispatch(createNotify({msg, auth, socket}))
 
     } catch (err) {
         dispatch({
