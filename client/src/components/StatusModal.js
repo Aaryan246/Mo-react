@@ -91,8 +91,8 @@ const StatusModal = () => {
       dispatch(updatePost({ content,motive, images, auth, status }));
     } else {
       console.log(content,motive, images, auth, status )
-      // dispatch(createPost({ content,motive, images, auth, socket }));
-      dispatch(createArticle({ content,motive, auth, socket }));
+      dispatch(createPost({ content,motive, images, auth, socket }));
+      
     }
 
     setContent("");
