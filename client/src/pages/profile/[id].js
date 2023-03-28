@@ -34,12 +34,12 @@ const Profile = () => {
           >
             Movements
           </button>
-          {/* <button
+          <button
             className={saveTab ? "active" : ""}
             onClick={() => setSaveTab(true)}
           >
             Saved
-          </button> */}
+          </button>
         </div>
       )}
 

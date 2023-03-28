@@ -88,14 +88,14 @@ const CardFooter = ({ post }) => {
             <i className="far fa-comment" />
           </Link>
 
-          {/* <img src={Send} alt="Send" onClick={() => setIsShare(!isShare)} /> */}
+          <img src={Send} alt="Send" onClick={() => setIsShare(!isShare)} />
         </div>
 
-        {/* {saved ? (
+        {saved ? (
           <i className="fas fa-bookmark text-info" onClick={handleUnSavePost} />
         ) : (
           <i className="far fa-bookmark" onClick={handleSavePost} />
-        )} */}
+        )}
       </div>
 
       <div className="d-flex justify-content-between">
@@ -103,23 +103,30 @@ const CardFooter = ({ post }) => {
           {post.likes.length} likes
         </h6>
 
-        <h6 style={{ padding: "0 25px", cursor: "pointer" }}>
-          {post.comments.length} comments
-        </h6>
         <a
           href="https://pages.razorpay.com/pl_LVIwvUVKuX7QL7/view"
           target={"_blank"}
+          style={{
+            backgroundColor: "#fff",
+          }}
         >
           <button
             style={{
-              background_color: "blue",
+              color: "green",
+              backgroundColor: "#fff",
               border: "0px",
+              borderRadius: "2px",
               padding: "0 25px",
+              fontWeight: "600",
             }}
           >
             Donate
           </button>
         </a>
+
+        <h6 style={{ padding: "0 25px", cursor: "pointer" }}>
+          {post.comments.length} comments
+        </h6>
       </div>
 
       {/* {isShare && (
