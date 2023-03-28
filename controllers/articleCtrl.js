@@ -48,7 +48,7 @@ const articleCtrl = {
           user: [...req.user.following, req.user._id],
         }),
         req.query
-      ).paginating();
+      );
 
       const article = await features.query
         .sort("-createdAt")

@@ -16,6 +16,7 @@ import StatusModal from './components/StatusModal'
 import { useSelector, useDispatch } from 'react-redux'
 import { refreshToken } from './redux/actions/authAction'
 import { getPosts } from './redux/actions/postAction'
+import { getArticles } from './redux/actions/articleAction'
 import { getSuggestions } from './redux/actions/suggestionsAction'
 
 import io from 'socket.io-client'
@@ -43,6 +44,7 @@ function App() {
   useEffect(() => {
     if(auth.token) {
       dispatch(getPosts(auth.token))
+      dispatch(getArticles(auth.token))
       dispatch(getSuggestions(auth.token))
       dispatch(getNotifies(auth.token))
     }
@@ -82,7 +84,6 @@ function App() {
           {status && <StatusModal />}
           {auth.token && <SocketClient />}
           {call && <CallModal />}
-          {console.log('hi'+ articlestatus+status)}
           {articlestatus && <ArticleModal/>}
           <Route exact path="/" component={auth.token ? Home : Login} />
           <Route exact path="/register" component={Register} />

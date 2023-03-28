@@ -1,41 +1,44 @@
-import { POST_TYPES } from '../actions/articleAction'
+import { ARTICLE_TYPES } from '../actions/articleAction'
 import { EditData, DeleteData } from '../actions/globalTypes'
 
 const initialState = {
     loading: false,
-    posts: [],
+    article: [],
     result: 0,
     page: 2
 }
 
 const articleReducer = (state = initialState, action) => {
+    
     switch (action.type){
-        case POST_TYPES.CREATE_POST:
+        case ARTICLE_TYPES.CREATE_ARTICLE:
             return {
                 ...state,
-                posts: [action.payload, ...state.posts]
+                article: [action.payload, ...state.articles]
             };
-        case POST_TYPES.LOADING_POST:
+        case ARTICLE_TYPES.LOADING_ARTICLE:
             return {
                 ...state,
                 loading: action.payload
             };
-        case POST_TYPES.GET_POSTS:
+        case ARTICLE_TYPES.GET_ARTICLES:
+            console.log(action)
             return {
                 ...state,
-                posts: action.payload.posts,
+                
+                article: action.payload.article,
                 result: action.payload.result,
                 page: action.payload.page
             };
-        case POST_TYPES.UPDATE_POST:
+        case ARTICLE_TYPES.UPDATE_ARTICLE:
             return {
                 ...state,
-                posts: EditData(state.posts, action.payload._id, action.payload)
+                articles: EditData(state.article, action.payload._id, action.payload)
             };
-        case POST_TYPES.DELETE_POST:
+        case ARTICLE_TYPES.DELETE_ARTICLE:
             return {
                 ...state,
-                posts: DeleteData(state.posts, action.payload._id)
+                articles: DeleteData(state.article, action.payload._id)
             };
         default:
             return state;

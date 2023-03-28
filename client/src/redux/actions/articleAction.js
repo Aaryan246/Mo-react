@@ -3,13 +3,13 @@ import { imageUpload } from '../../utils/imageUpload'
 import { postDataAPI, getDataAPI, patchDataAPI, deleteDataAPI } from '../../utils/fetchData'
 import { createNotify, removeNotify } from './notifyAction'
 
-export const POST_TYPES = {
-    CREATE_POST: 'CREATE_POST',
-    LOADING_POST: 'LOADING_POST',
-    GET_POSTS: 'GET_POSTS',
-    UPDATE_POST: 'UPDATE_POST',
-    GET_POST: 'GET_POST',
-    DELETE_POST: 'DELETE_POST'
+export const ARTICLE_TYPES = {
+    CREATE_ARTICLE: 'CREATE_ARTICLE',
+    LOADING_ARTICLE: 'LOADING_ARTICLE',
+    GET_ARTICLES: 'GET_ARTICLES',
+    UPDATE_ARTICLE: 'UPDATE_ARTICLE',
+    GET_ARTICLE: 'GET_ARTICLE',
+    DELETE_ARTICLE: 'DELETE_ARTICLE'
 }
 
 
@@ -20,6 +20,7 @@ export const createArticle = ({content, motive, auth, socket}) => async (dispatc
         dispatch({ type: GLOBALTYPES.ALERT, payload: {loading: false} })
 
     } catch (err) {
+        
         dispatch({
             type: GLOBALTYPES.ALERT,
             payload: {error: err.response.data.msg}
@@ -29,16 +30,19 @@ export const createArticle = ({content, motive, auth, socket}) => async (dispatc
 
 export const getArticles = (token) => async (dispatch) => {
     try {
-        dispatch({ type: POST_TYPES.LOADING_POST, payload: true })
+        dispatch({ type: ARTICLE_TYPES.LOADING_ARTICLE, payload: true })
         const res = await getDataAPI('articles', token)
-        
+        console.log('respones')
+        console.log(res)
+        console.log(res.data)
         dispatch({
-            type: POST_TYPES.GET_POSTS,
+            type: ARTICLE_TYPES.GET_ARTICLES,
             payload: {...res.data, page: 2}
         })
-
-        dispatch({ type: POST_TYPES.LOADING_POST, payload: false })
+        
+        dispatch({ type: ARTICLE_TYPES.LOADING_ARTICLE, payload: false })
     } catch (err) {
+        console.log("article me error")
         dispatch({
             type: GLOBALTYPES.ALERT,
             payload: {error: err.response.data.msg}
@@ -65,7 +69,7 @@ export const getArticles = (token) => async (dispatch) => {
 //             content,motive, images: [...imgOldUrl, ...media] 
 //         }, auth.token)
 
-//         dispatch({ type: POST_TYPES.UPDATE_POST, payload: res.data.newPost })
+//         dispatch({ type: ARTICLE_TYPES.UPDATE_ARTICLE, payload: res.data.newPost })
 
 //         dispatch({ type: GLOBALTYPES.ALERT, payload: {success: res.data.msg} })
 //     } catch (err) {
@@ -78,7 +82,7 @@ export const getArticles = (token) => async (dispatch) => {
 
 export const likeArticle = ({post, auth, socket}) => async (dispatch) => {
     const newPost = {...post, likes: [...post.likes, auth.user]}
-    dispatch({ type: POST_TYPES.UPDATE_POST, payload: newPost})
+    dispatch({ type: ARTICLE_TYPES.UPDATE_ARTICLE, payload: newPost})
 
     socket.emit('likePost', newPost)
 
@@ -107,7 +111,7 @@ export const likeArticle = ({post, auth, socket}) => async (dispatch) => {
 
 export const unLikeArticle = ({post, auth, socket}) => async (dispatch) => {
     const newPost = {...post, likes: post.likes.filter(like => like._id !== auth.user._id)}
-    dispatch({ type: POST_TYPES.UPDATE_POST, payload: newPost})
+    dispatch({ type: ARTICLE_TYPES.UPDATE_ARTICLE, payload: newPost})
 
     socket.emit('unLikePost', newPost)
 
@@ -135,7 +139,7 @@ export const getArticle = ({detailPost, id, auth}) => async (dispatch) => {
     if(detailPost.every(post => post._id !== id)){
         try {
             const res = await getDataAPI(`article/${id}`, auth.token)
-            dispatch({ type: POST_TYPES.GET_POST, payload: res.data.post })
+            dispatch({ type: ARTICLE_TYPES.GET_ARTICLE, payload: res.data.post })
         } catch (err) {
             dispatch({
                 type: GLOBALTYPES.ALERT,
@@ -146,15 +150,16 @@ export const getArticle = ({detailPost, id, auth}) => async (dispatch) => {
 }
 
 export const deleteArticle = ({post, auth, socket}) => async (dispatch) => {
-    dispatch({ type: POST_TYPES.DELETE_POST, payload: post })
+    dispatch({ type: ARTICLE_TYPES.DELETE_ARTICLE, payload: post })
 
     try {
         const res = await deleteDataAPI(`article/${post._id}`, auth.token)
-
+        console.log(res)
+        console.log(post)
         // Notify
         const msg = {
             id: post._id,
-            text: 'added a new article.',
+            text: 'delete a article.',
             recipients: res.data.newPost.user.followers,
             url: `/article/${post._id}`,
         }
