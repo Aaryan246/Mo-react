@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { GLOBALTYPES } from "../redux/actions/globalTypes";
 import { createPost, updatePost } from "../redux/actions/postAction";
+import { createArticle } from "../redux/actions/articleAction";
 import Icons from "./Icons";
 import { imageShow, videoShow } from "../utils/mediaShow";
 
@@ -91,6 +92,7 @@ const StatusModal = () => {
     } else {
       console.log(content,motive, images, auth, status )
       dispatch(createPost({ content,motive, images, auth, socket }));
+      
     }
 
     setContent("");

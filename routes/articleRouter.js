@@ -3,8 +3,8 @@ const articleCtrl = require("../controllers/articleCtrl");
 const auth = require("../middleware/auth");
 
 router
-  .route("/article")
-  .post(auth, articleCtrl.createArticle)
+  .route("/articles")
+  .post(auth,articleCtrl.createArticle)
   .get(auth, articleCtrl.getArticles);
 
 router

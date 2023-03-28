@@ -6,6 +6,7 @@ import moment from "moment";
 import { GLOBALTYPES } from "../../../redux/actions/globalTypes";
 import { deletePost } from "../../../redux/actions/postAction";
 import { BASE_URL } from "../../../utils/config";
+import { deleteArticle } from "../../../redux/actions/articleAction";
 
 const CardHeader = ({ post }) => {
   const { auth, socket } = useSelector((state) => state);
@@ -19,7 +20,7 @@ const CardHeader = ({ post }) => {
 
   const handleDeletePost = () => {
     if (window.confirm("Are you sure want to delete this post?")) {
-      dispatch(deletePost({ post, auth, socket }));
+      dispatch(deleteArticle({ post, auth, socket }));
       return history.push("/");
     }
   };

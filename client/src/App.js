@@ -7,6 +7,7 @@ import PrivateRouter from './customRouter/PrivateRouter'
 import Home from './pages/home'
 import Login from './pages/login'
 import Register from './pages/register'
+import Article from './pages/article'
 
 import Alert from './components/alert/Alert'
 import Header from './components/header/Header'
@@ -15,6 +16,7 @@ import StatusModal from './components/StatusModal'
 import { useSelector, useDispatch } from 'react-redux'
 import { refreshToken } from './redux/actions/authAction'
 import { getPosts } from './redux/actions/postAction'
+import { getArticles } from './redux/actions/articleAction'
 import { getSuggestions } from './redux/actions/suggestionsAction'
 
 import io from 'socket.io-client'
@@ -24,9 +26,11 @@ import SocketClient from './SocketClient'
 import { getNotifies } from './redux/actions/notifyAction'
 import CallModal from './components/message/CallModal'
 import Peer from 'peerjs'
+import ArticleModal from './components/ArticleModal'
 
 function App() {
-  const { auth, status, modal, call } = useSelector(state => state)
+  const { auth, status, modal,articlestatus, call } = useSelector(state => state)
+  console.log(status)
   const dispatch = useDispatch()
 
   useEffect(() => {
@@ -40,6 +44,7 @@ function App() {
   useEffect(() => {
     if(auth.token) {
       dispatch(getPosts(auth.token))
+      dispatch(getArticles(auth.token))
       dispatch(getSuggestions(auth.token))
       dispatch(getNotifies(auth.token))
     }
@@ -79,10 +84,10 @@ function App() {
           {status && <StatusModal />}
           {auth.token && <SocketClient />}
           {call && <CallModal />}
-          
+          {articlestatus && <ArticleModal/>}
           <Route exact path="/" component={auth.token ? Home : Login} />
           <Route exact path="/register" component={Register} />
-
+          {/* <PrivateRouter exact path="/article" component={Article} /> */}
           <PrivateRouter exact path="/:page" component={PageRender} />
           <PrivateRouter exact path="/:page/:id" component={PageRender} />
           
