@@ -8,6 +8,7 @@ import Home from './pages/home'
 import Login from './pages/login'
 import Register from './pages/register'
 import Article from './pages/article'
+import DonationPage from './pages/donation'
 
 import Alert from './components/alert/Alert'
 import Header from './components/header/Header'
@@ -87,9 +88,11 @@ function App() {
           {articlestatus && <ArticleModal/>}
           <Route exact path="/" component={auth.token ? Home : Login} />
           <Route exact path="/register" component={Register} />
+          <Route exact path="/payment" component={DonationPage} />
           {/* <PrivateRouter exact path="/article" component={Article} /> */}
           <PrivateRouter exact path="/:page" component={PageRender} />
           <PrivateRouter exact path="/:page/:id" component={PageRender} />
+          
           
         </div>
       </div>
