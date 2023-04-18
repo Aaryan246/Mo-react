@@ -32,7 +32,6 @@ const CardFooter = ({ post }) => {
       setIsLike(false);
     }
   }, [post.likes, auth.user._id]);
-  
 
   const handleLike = async () => {
     if (loadLike) return;
@@ -81,7 +80,7 @@ const CardFooter = ({ post }) => {
       script.src = "https://checkout.razorpay.com/v1/payment-button.js";
       script.async = true;
       script.dataset.payment_button_id = "pl_LerFscFAgQltEP";
-      
+
       rzpPaymentForm.appendChild(script);
     }
   });
@@ -109,22 +108,20 @@ const CardFooter = ({ post }) => {
           <i className="far fa-bookmark" onClick={handleSavePost} />
         )}
       </div>
-      <div>
-      {/*<button onClick={<form><script src="https://checkout.razorpay.com/v1/payment-button.js" data-payment_button_id="pl_LeqOAyJIYsKNmy" async> </script></form>}>gg</button>*/}
-      <form id="rzp_payment_form"></form>
-      <h2>This line comes below payment button!</h2>
-      </div>
-      
+
       <div className="d-flex justify-content-between">
         <h6 style={{ padding: "0 25px", cursor: "pointer" }}>
           {post.likes.length} likes
         </h6>
-        <a href=""></a>
-
+        <div>
+          {/*<button onClick={<form><script src="https://checkout.razorpay.com/v1/payment-button.js" data-payment_button_id="pl_LeqOAyJIYsKNmy" async> </script></form>}>gg</button>*/}
+          <form id="rzp_payment_form"></form>
+        </div>
         <h6 style={{ padding: "0 25px", cursor: "pointer" }}>
           {post.comments.length} comments
         </h6>
       </div>
+      <br />
 
       {/* {isShare && (
         <ShareModal url={`${BASE_URL}/post/${post._id}`} theme={theme} />
