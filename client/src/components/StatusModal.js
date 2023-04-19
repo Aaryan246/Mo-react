@@ -89,12 +89,31 @@ const StatusModal = () => {
       });
 
     if (status.onEdit) {
-      console.log(content,motive,formLink, validTill, images, auth, status )
-      dispatch(updatePost({ content,motive,formLink, validTill, images, auth, status }));
+      console.log(content, motive, formLink, validTill, images, auth, status);
+      dispatch(
+        updatePost({
+          content,
+          motive,
+          formLink,
+          validTill,
+          images,
+          auth,
+          status,
+        })
+      );
     } else {
-      console.log(content,motive,formLink, validTill, images, auth, status )
-      dispatch(createPost({ content,motive,formLink, validTill, images, auth, socket }));
-      
+      console.log(content, motive, formLink, validTill, images, auth, status);
+      dispatch(
+        createPost({
+          content,
+          motive,
+          formLink,
+          validTill,
+          images,
+          auth,
+          socket,
+        })
+      );
     }
 
     setContent("");
@@ -145,7 +164,7 @@ const StatusModal = () => {
               background: theme ? "rgba(0,0,0,.03)" : "",
             }}
           />
-          <input 
+          <input
             type={"text"}
             name="motive"
             value={motive}
@@ -155,22 +174,28 @@ const StatusModal = () => {
               filter: theme ? "invert(1)" : "invert(0)",
               color: theme ? "white" : "#111",
               background: theme ? "rgba(0,0,0,.03)" : "",
+              border: "0px",
             }}
           />
-          <input 
+          <br />
+          <br />
+          <input
             type={"text"}
             name="formLink"
             value={formLink}
-            placeholder={`${auth.user.username}, form link daal `}
+            placeholder={`${auth.user.username}, form link `}
             onChange={(e) => setFormLink(e.target.value)}
             style={{
               filter: theme ? "invert(1)" : "invert(0)",
               color: theme ? "white" : "#111",
               background: theme ? "rgba(0,0,0,.03)" : "",
+              border: "0px",
             }}
           />
-          <input 
-            type={"datetime-local"}
+          <br />
+          <br />
+          <input
+            type={"date"}
             name="validTill"
             value={validTill}
             placeholder={`${auth.user.username}, validTill? `}
@@ -179,6 +204,7 @@ const StatusModal = () => {
               filter: theme ? "invert(1)" : "invert(0)",
               color: theme ? "white" : "#111",
               background: theme ? "rgba(0,0,0,.03)" : "",
+              border: "0px",
             }}
           />
 

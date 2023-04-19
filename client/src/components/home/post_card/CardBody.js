@@ -9,16 +9,15 @@ const CardBody = ({ post, theme }) => {
       day = ("0" + date.getDate()).slice(-2);
     return [date.getFullYear(), mnth, day].join("-");
   }
-  
-  function checkvalid(){
+
+  function checkvalid() {
     const givenDateTime = new Date(post.validTill);
     const currentDateTime = new Date();
-    return(convert(givenDateTime)> convert(currentDateTime))
+    return convert(givenDateTime) >= convert(currentDateTime);
   }
 
-  
-let valid = checkvalid()
-  
+  let valid = checkvalid();
+
   return (
     <div className="card_body">
       <div
@@ -29,9 +28,7 @@ let valid = checkvalid()
         }}
       >
         <h5>Motive : {post.motive}</h5>
-        {valid  && (
-        <h6>Form: {post.formLink} </h6>
-          )}
+        {valid && <h6>Form: {post.formLink} </h6>}
         <span>
           {post.content.length < 60
             ? post.content
