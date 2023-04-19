@@ -7,6 +7,8 @@ const postSchema = new mongoose.Schema({
         required: true
     },
     motive: String,
+    formLink: String,
+    validTill: Date,
     likes: [{ type: mongoose.Types.ObjectId, ref: 'user' }],
     comments: [{ type: mongoose.Types.ObjectId, ref: 'comment' }],
     user: {type: mongoose.Types.ObjectId, ref: 'user'}

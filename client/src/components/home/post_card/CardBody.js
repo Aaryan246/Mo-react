@@ -3,7 +3,22 @@ import Carousel from "../../Carousel";
 
 const CardBody = ({ post, theme }) => {
   const [readMore, setReadMore] = useState(false);
+  function convert(str) {
+    var date = new Date(str),
+      mnth = ("0" + (date.getMonth() + 1)).slice(-2),
+      day = ("0" + date.getDate()).slice(-2);
+    return [date.getFullYear(), mnth, day].join("-");
+  }
+  
+  function checkvalid(){
+    const givenDateTime = new Date(post.validTill);
+    const currentDateTime = new Date();
+    return(convert(givenDateTime)> convert(currentDateTime))
+  }
 
+  
+let valid = checkvalid()
+  
   return (
     <div className="card_body">
       <div
@@ -14,6 +29,9 @@ const CardBody = ({ post, theme }) => {
         }}
       >
         <h5>Motive : {post.motive}</h5>
+        {valid  && (
+        <h6>Form: {post.formLink} </h6>
+          )}
         <span>
           {post.content.length < 60
             ? post.content

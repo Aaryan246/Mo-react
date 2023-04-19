@@ -12,6 +12,8 @@ const StatusModal = () => {
 
   const [content, setContent] = useState("");
   const [motive, setMotive] = useState("");
+  const [formLink, setFormLink] = useState("");
+  const [validTill, setValidTill] = useState("");
   const [images, setImages] = useState([]);
 
   const [stream, setStream] = useState(false);
@@ -87,16 +89,18 @@ const StatusModal = () => {
       });
 
     if (status.onEdit) {
-      console.log(content,motive, images, auth, status )
-      dispatch(updatePost({ content,motive, images, auth, status }));
+      console.log(content,motive,formLink, validTill, images, auth, status )
+      dispatch(updatePost({ content,motive,formLink, validTill, images, auth, status }));
     } else {
-      console.log(content,motive, images, auth, status )
-      dispatch(createPost({ content,motive, images, auth, socket }));
+      console.log(content,motive,formLink, validTill, images, auth, status )
+      dispatch(createPost({ content,motive,formLink, validTill, images, auth, socket }));
       
     }
 
     setContent("");
     setMotive("");
+    setFormLink("");
+    setValidTill("");
     setImages([]);
     if (tracks) tracks.stop();
     dispatch({ type: GLOBALTYPES.STATUS, payload: false });
@@ -106,6 +110,8 @@ const StatusModal = () => {
     if (status.onEdit) {
       setContent(status.content);
       setMotive(status.motive);
+      setFormLink(status.formLink);
+      setValidTill(status.validTill);
       setImages(status.images);
     }
   }, [status]);
@@ -145,6 +151,30 @@ const StatusModal = () => {
             value={motive}
             placeholder={`${auth.user.username}, motive? 💫`}
             onChange={(e) => setMotive(e.target.value)}
+            style={{
+              filter: theme ? "invert(1)" : "invert(0)",
+              color: theme ? "white" : "#111",
+              background: theme ? "rgba(0,0,0,.03)" : "",
+            }}
+          />
+          <input 
+            type={"text"}
+            name="formLink"
+            value={formLink}
+            placeholder={`${auth.user.username}, form link daal `}
+            onChange={(e) => setFormLink(e.target.value)}
+            style={{
+              filter: theme ? "invert(1)" : "invert(0)",
+              color: theme ? "white" : "#111",
+              background: theme ? "rgba(0,0,0,.03)" : "",
+            }}
+          />
+          <input 
+            type={"datetime-local"}
+            name="validTill"
+            value={validTill}
+            placeholder={`${auth.user.username}, validTill? `}
+            onChange={(e) => setValidTill(e.target.value)}
             style={{
               filter: theme ? "invert(1)" : "invert(0)",
               color: theme ? "white" : "#111",

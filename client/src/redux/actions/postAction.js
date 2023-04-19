@@ -13,13 +13,13 @@ export const POST_TYPES = {
 }
 
 
-export const createPost = ({content, motive,images, auth, socket}) => async (dispatch) => {
+export const createPost = ({content, motive,formLink,validTill,images, auth, socket}) => async (dispatch) => {
     let media = []
     try {
         dispatch({ type: GLOBALTYPES.ALERT, payload: {loading: true} })
         if(images.length > 0) media = await imageUpload(images)
 
-        const res = await postDataAPI('posts', { content,motive, images: media }, auth.token)
+        const res = await postDataAPI('posts', { content,motive, formLink,validTill,images: media }, auth.token)
 
         dispatch({ 
             type: POST_TYPES.CREATE_POST, 
@@ -67,13 +67,15 @@ export const getPosts = (token) => async (dispatch) => {
     }
 }
 
-export const updatePost = ({content,motive, images, auth, status}) => async (dispatch) => {
+export const updatePost = ({content,motive,formLink,validTill, images, auth, status}) => async (dispatch) => {
     let media = []
     const imgNewUrl = images.filter(img => !img.url)
     const imgOldUrl = images.filter(img => img.url)
 
     if(status.content === content 
         && status.motive === motive
+        && status.formLink === formLink
+        && status.validTill === validTill
         && imgNewUrl.length === 0
         && imgOldUrl.length === status.images.length
     ) return;
@@ -83,7 +85,7 @@ export const updatePost = ({content,motive, images, auth, status}) => async (dis
         if(imgNewUrl.length > 0) media = await imageUpload(imgNewUrl)
 
         const res = await patchDataAPI(`post/${status._id}`, { 
-            content,motive, images: [...imgOldUrl, ...media] 
+            content,motive,formLink,validTill, images: [...imgOldUrl, ...media] 
         }, auth.token)
 
         dispatch({ type: POST_TYPES.UPDATE_POST, payload: res.data.newPost })
