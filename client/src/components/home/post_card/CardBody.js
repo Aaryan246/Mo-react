@@ -28,7 +28,11 @@ const CardBody = ({ post, theme }) => {
         }}
       >
         <h5>Motive : {post.motive}</h5>
-        {valid && <h6>Form: {post.formLink} </h6>}
+        {valid && (
+          <h6>
+            Form: <a href={post.formLink}>{post.formLink}</a>
+          </h6>
+        )}
         <span>
           {post.content.length < 60
             ? post.content

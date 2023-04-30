@@ -4,11 +4,10 @@ import { Link, useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import moment from "moment";
 import { GLOBALTYPES } from "../../../redux/actions/globalTypes";
-import { deletePost } from "../../../redux/actions/postAction";
 import { BASE_URL } from "../../../utils/config";
-// import { deletePost } from "../../../redux/actions/postAction";
+import { deleteArticle } from "../../../redux/actions/articleAction";
 
-const CardHeader = ({ post }) => {
+const ArticleHeader = ({ post }) => {
   const { auth, socket } = useSelector((state) => state);
   const dispatch = useDispatch();
 
@@ -20,8 +19,7 @@ const CardHeader = ({ post }) => {
 
   const handleDeletePost = () => {
     if (window.confirm("Are you sure want to delete this post?")) {
-      console.log(post);
-      dispatch(deletePost({ post, auth, socket }));
+      dispatch(deleteArticle({ post, auth, socket }));
       return history.push("/");
     }
   };
@@ -36,7 +34,7 @@ const CardHeader = ({ post }) => {
         <Avatar src={post.user.avatar} size="big-avatar" />
         <div className="card_name">
           <h6 className="m-0">
-            <Link to={`/profile/${post.user._id}`} className="text-dark">
+            <Link to={`/article/${post.user._id}`} className="text-dark">
               {post.user.username}
             </Link>
           </h6>
@@ -59,7 +57,7 @@ const CardHeader = ({ post }) => {
               </div> */}
               <div className="dropdown-item" onClick={handleDeletePost}>
                 <span className="material-icons">delete_outline</span> Remove
-                Post
+                Article
               </div>
             </>
           )}
@@ -73,4 +71,4 @@ const CardHeader = ({ post }) => {
   );
 };
 
-export default CardHeader;
+export default ArticleHeader;

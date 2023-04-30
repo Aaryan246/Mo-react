@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Carousel from "../../Carousel";
+import { deleteArticle } from "../../../redux/actions/articleAction";
 
 const ArticleBody = ({ post, theme }) => {
   const [readMore, setReadMore] = useState(false);

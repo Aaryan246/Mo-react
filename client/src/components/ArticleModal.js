@@ -23,12 +23,12 @@ const ArticleModal = () => {
     e.preventDefault();
 
     if (articlestatus.onEdit) {
-      console.log(content,motive, auth, articlestatus )
-      dispatch(updatePost({ content,motive, auth, articlestatus }));
+      console.log(content, motive, auth, articlestatus);
+      dispatch(updatePost({ content, motive, auth, articlestatus }));
     } else {
-      console.log(content,motive, auth, articlestatus )
+      console.log(content, motive, auth, articlestatus);
       // dispatch(createPost({ content,motive, images, auth, socket }));
-      dispatch(createArticle({ content,motive, auth, socket }));
+      dispatch(createArticle({ content, motive, auth, socket }));
     }
 
     setContent("");
@@ -44,10 +44,9 @@ const ArticleModal = () => {
       setImages(articlestatus.images);
     }
   }, [articlestatus]);
-console.log("modal")
+  console.log("modal");
   return (
     <div className="status_modal">
-
       <form onSubmit={handleSubmit}>
         <div className="status_header">
           <h5 className="m-0">Create Article</h5>
@@ -67,7 +66,7 @@ console.log("modal")
           <textarea
             name="content"
             value={content}
-            placeholder={`${auth.user.username}, article likhna hai? 💫`}
+            placeholder={`${auth.user.username}, article 💫`}
             onChange={(e) => setContent(e.target.value)}
             style={{
               filter: theme ? "invert(1)" : "invert(0)",
@@ -75,7 +74,7 @@ console.log("modal")
               background: theme ? "rgba(0,0,0,.03)" : "",
             }}
           />
-          <input 
+          <input
             type={"text"}
             name="motive"
             value={motive}
@@ -92,7 +91,6 @@ console.log("modal")
             <div className="flex-fill"></div>
             <Icons setContent={setContent} content={content} theme={theme} />
           </div>
-
         </div>
 
         <div className="status_footer">
